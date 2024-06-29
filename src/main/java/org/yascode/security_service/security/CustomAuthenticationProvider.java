@@ -13,9 +13,12 @@ import java.util.Objects;
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
     private final MyUserDetailsService userDetailsService;
+    private final JdbcUserDetailsService jdbcUserDetailsService;
 
-    public CustomAuthenticationProvider(MyUserDetailsService userDetailsService) {
+    public CustomAuthenticationProvider(MyUserDetailsService userDetailsService,
+                                        JdbcUserDetailsService jdbcUserDetailsService) {
         this.userDetailsService = userDetailsService;
+        this.jdbcUserDetailsService = jdbcUserDetailsService;
     }
 
     @Override
@@ -23,7 +26,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        //UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UserDetails userDetails = jdbcUserDetailsService.loadUserByUsername(username);
 
         if(Objects.equals(password, userDetails.getPassword()))
             return new UsernamePasswordAuthenticationToken(username, password, userDetails.getAuthorities());
