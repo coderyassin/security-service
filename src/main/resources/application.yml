@@ -1,0 +1,23 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: security-service
+security:
+  users:
+    - id: 1
+      username: "073176"
+      password: YassMel2197@@@@%%%%****5
+    - id: 2
+      username: "078171"
+      password: AkraMag2120@@@@%%%%****5
+  roles:
+    - id: 1
+      userId: 1
+      role: "USER"
+    - id: 2
+      userId: 1
+      role: "ADMIN"
+    - id: 3
+      userId: 2
+      role: "USER"
