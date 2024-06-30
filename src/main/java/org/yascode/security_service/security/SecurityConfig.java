@@ -19,7 +19,8 @@ public class SecurityConfig {
         http.authorizeHttpRequests(requests ->
                     requests.requestMatchers("/", "/home").permitAll().
                     requestMatchers("/home/*" ).hasAnyAuthority("USER", "ADMIN").
-                    requestMatchers("/statistic/*").hasAuthority("ADMIN").
+                    requestMatchers( "/statistic/*").hasAuthority("ADMIN").
+                    requestMatchers("/userPrincipal/*", "/authority/*").hasAuthority("SUPER_ADMIN").
                     anyRequest().authenticated())
             .httpBasic(Customizer.withDefaults())
             .csrf(AbstractHttpConfigurer::disable);

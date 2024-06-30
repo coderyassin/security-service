@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class Authority extends AbstractEntity {
+    @Column(unique = true, nullable = false)
     private String authority;
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "authorities")
     @JsonIgnore
