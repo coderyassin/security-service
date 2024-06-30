@@ -21,5 +21,16 @@ public class ExpenseExceptionHandler {
                 request.getDescription(false));
         return message;
     }
+
+    @ExceptionHandler(AccountDisabledException.class)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    public ErrorMessage resourceNotFoundException(AccountDisabledException ex, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+                HttpStatus.UNAUTHORIZED.value(),
+                LocalDateTime.now(),
+                ex.getMessage(),
+                request.getDescription(false));
+        return message;
+    }
 }
 

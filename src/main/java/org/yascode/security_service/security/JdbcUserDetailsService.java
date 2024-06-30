@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.yascode.security_service.entity.UserPrincipal;
+import org.yascode.security_service.exception.AccountDisabledException;
 import org.yascode.security_service.repository.UserPrincipalRepository;
 
 import java.util.Collection;
@@ -36,6 +37,7 @@ public class JdbcUserDetailsService implements UserDetailsService {
             this.logger.debug("Query returned no results for user '" + username + "'");
             throw new UsernameNotFoundException("Username {0} not found");
         }
+
         return UserDetailsPrincipal.builder()
                             .userPrincipal(userPrincipal)
                             .build();
